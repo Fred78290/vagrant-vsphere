@@ -1,3 +1,8 @@
+## [1.13.3 (2018-19-11)](https://github.com/Fred78290/vagrant-vsphere/releases/tag/v1.13.3)
+
+  - Update i18n dependency to v1.0 and greater. Make compatibility with vagrant 2.2.1.
+  - Suppress build warning
+
 ## [1.13.2 (2017-12-06)](https://github.com/nsidc/vagrant-vsphere/releases/tag/v1.13.2)
 
   - Update rbvmomi dependency to v1.11.5 and greater (but still less than
