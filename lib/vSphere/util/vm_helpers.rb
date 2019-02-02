@@ -10,12 +10,24 @@ module VagrantPlugins
       end
 
       module VmHelpers
+        def await_vm_state(vm, state)
+          while get_vm_state(vm).eql?(VmState::POWERED_OFF) do
+            sleep(1.0/2.0)
+          end
+        end
+
         def power_on_vm(vm)
           vm.PowerOnVM_Task.wait_for_completion
         end
 
         def power_off_vm(vm)
-          vm.PowerOffVM_Task.wait_for_completion
+          begin
+            vm.shutdownGuest
+          rescue RbVmomi::Fault
+            vm.PowerOffVM_Task.wait_for_completion
+          end
+
+          await_vm_state(vm, VmState::POWERED_OFF)
         end
 
         # https://www.vmware.com/support/developer/converter-sdk/conv61_apireference/vim.VirtualMachine.html#powerOn
